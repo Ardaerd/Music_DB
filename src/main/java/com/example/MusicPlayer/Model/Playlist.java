@@ -15,10 +15,20 @@ public class Playlist {
     @Column(name = "Name", nullable = false)
     private Long name;
 
-    @Column(name = "Playlists", nullable = false)
+    @OneToMany
+    @JoinTable(name = "Playlist_Playlists",
+            joinColumns = @JoinColumn(name = "Playlist_1_ID",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "Playlist_2_ID",
+                    referencedColumnName = "id"))
     private List<Playlist> playlists;
 
-    @Column(name = "Songs", nullable = false)
+    @ManyToMany
+    @JoinTable(name = "Playlist_Songs",
+            joinColumns = @JoinColumn(name = "Playlist_ID",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "Song_ID",
+                    referencedColumnName = "id"))
     private List<Song> songs;
 
     public Long getId() {

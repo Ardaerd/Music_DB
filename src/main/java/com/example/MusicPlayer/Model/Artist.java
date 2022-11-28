@@ -2,11 +2,38 @@ package com.example.MusicPlayer.Model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "Artist")
 public class Artist {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @OneToMany
+    @JoinTable(name = "Artist_Songs",
+    joinColumns = @JoinColumn(name = "Artist_ID",
+    referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "Song_ID",
+    referencedColumnName = "id"))
+    private List<Song> songs = new ArrayList<>();
+
+    @OneToMany
+    @JoinTable(name = "Artist_Albums",
+            joinColumns = @JoinColumn(name = "Artist_ID", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "Album_ID", referencedColumnName = "id"))
+    private List<Album> albums = new ArrayList<>();
+
+    public Artist(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
@@ -31,19 +58,6 @@ public class Artist {
         this.albums = albums;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @Column(name = "Songs", nullable = false)
-    private List<Song> songs;
-
-    @Column(name = "Albums", nullable = false)
-    private List<Album> albums;
     public Long getId() {
         return id;
     }

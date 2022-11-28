@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "Album")
 public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,10 +15,12 @@ public class Album {
     @Column(name = "Name", nullable = false)
     private Long name;
 
-    @Column(name = "Artist", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "Artist_ID")
     private Artist artist;
 
-    @Column(name = "Songs", nullable = false)
+    @OneToMany
+    @JoinColumn(name = "Songs_ID")
     private List<Song> songs;
 
 
