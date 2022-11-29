@@ -64,9 +64,10 @@ public class TestMusicService {
 
         album.setSongs(songs);
         album.setArtist(musicService.getArtistRepository().findArtistById(1).get());
+        musicService.getAlbumRepository().save(album);
 
         musicService.addArtist("The Weekend");
-        album.setArtist(musicService.getArtistRepository().findArtistById(2).get());
+
 
         musicService.assignArtistToAlbum(1,2);
     }
