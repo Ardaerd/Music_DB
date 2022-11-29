@@ -1,6 +1,7 @@
 package com.example.MusicPlayer.Services;
 
 import com.example.MusicPlayer.Model.Album;
+import com.example.MusicPlayer.Model.Artist;
 import com.example.MusicPlayer.Model.Song;
 import com.example.MusicPlayer.Repository.AlbumRepository;
 import com.example.MusicPlayer.Repository.ArtistRepository;
@@ -30,17 +31,31 @@ public class MusicService {
     @Transactional
     public void saveAlbum(Album album) {
         List<Song> songs = album.getSongs();
-        songRepository.saveAll(songs);
 
         albumRepository.save(album);
+        songRepository.saveAll(songs);
+
     }
 
+    @Transactional
     public void addSongToAlbum(int albumId, Song song) {
         Album album = albumRepository.findAlbumById(albumId).get();
+        song.setAlbum(album);
+
+        albumRepository.save(album);
 
         List<Song> songs = album.getSongs();
         songs.add(song);
         album.setSongs(songs);
+
+    }
+
+    @Transactional
+    public void assignArtistToAlbum(int albumId, int artistId) {
+        Album album = albumRepository.findAlbumById(albumId).get();
+        Artist artist = artistRepository.findArtistById(artistId).get();
+
+        album.setArtist(artist);
 
         albumRepository.save(album);
     }
@@ -48,6 +63,12 @@ public class MusicService {
     public List<Song> getSongs() {
 
         return songRepository.findAll();
+    }
+
+    @Transactional
+    public void addArtist(String artistName) {
+        Artist artist = new Artist(artistName);
+        artistRepository.save(artist);
     }
 
     public AlbumRepository getAlbumRepository() {

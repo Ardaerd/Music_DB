@@ -2,6 +2,7 @@ package com.example.MusicPlayer.Model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,13 +15,12 @@ public class Album {
     @Column(name = "Name", nullable = false)
     private String name;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "Artist_ID")
     private Artist artist;
 
-    @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "Songs_ID")
-    private List<Song> songs;
+    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST},mappedBy = "album")
+    private List<Song> songs = new ArrayList<>();
 
 
     public Album() {

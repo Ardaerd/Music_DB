@@ -17,18 +17,14 @@ public class Artist {
     private String name;
 
     @OneToMany
-    @JoinTable(name = "Artist_Songs",
-    joinColumns = @JoinColumn(name = "Artist_ID",
-    referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "Song_ID",
-    referencedColumnName = "id"))
+    @JoinColumn(name = "Songs_ID")
     private List<Song> songs = new ArrayList<>();
 
-    @OneToMany
-    @JoinTable(name = "Artist_Albums",
-            joinColumns = @JoinColumn(name = "Artist_ID", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "Album_ID", referencedColumnName = "id"))
+    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, mappedBy = "artist")
     private List<Album> albums = new ArrayList<>();
+
+    public Artist() {
+    }
 
     public Artist(String name) {
         this.name = name;

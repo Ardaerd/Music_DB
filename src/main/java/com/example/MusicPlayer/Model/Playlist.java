@@ -15,7 +15,7 @@ public class Playlist {
     @Column(name = "Name", nullable = false)
     private Long name;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "Playlist_Playlists",
             joinColumns = @JoinColumn(name = "Playlist_1_ID",
                     referencedColumnName = "id"),
