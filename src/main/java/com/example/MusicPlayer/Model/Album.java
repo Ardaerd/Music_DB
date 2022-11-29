@@ -9,26 +9,32 @@ import java.util.List;
 public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    private int id;
 
     @Column(name = "Name", nullable = false)
-    private Long name;
+    private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "Artist_ID")
     private Artist artist;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "Songs_ID")
     private List<Song> songs;
 
 
-    public Long getName() {
+    public Album() {
+    }
+
+    public Album(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public void setName(Long name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -48,11 +54,11 @@ public class Album {
         this.songs = songs;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

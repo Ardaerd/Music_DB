@@ -1,4 +1,4 @@
-package com.example.MusicPlayer.DAO;
+package com.example.MusicPlayer;
 
 import com.example.MusicPlayer.Model.Song;
 import com.example.MusicPlayer.Repository.SongRepository;
@@ -29,5 +29,22 @@ public class SongConfig {
             repository.saveAll(List.of(blinded_by_lights,i_was_never_there));
         };
     }
+
+//    @Bean
+//    CommandLineRunner commandLineRunner(
+//            ArtistRepository repository
+//    ) {
+//        return args -> {
+//            Artist blinded_by_lights = new Artist(
+//                    "The Weekend"
+//            );
+//
+//            Artist i_was_never_there = new Artist(
+//                    "The Blaze"
+//            );
+//
+//            repository.saveAll(List.of(blinded_by_lights,i_was_never_there));
+//        };
+//    }
 
 }
