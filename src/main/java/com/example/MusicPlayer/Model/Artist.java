@@ -16,8 +16,7 @@ public class Artist {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany
-    @JoinColumn(name = "Songs_ID")
+    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, mappedBy = "artist")
     private List<Song> songs = new ArrayList<>();
 
     @OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, mappedBy = "artist")

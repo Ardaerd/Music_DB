@@ -1,6 +1,7 @@
 package com.example.MusicPlayer.Service;
 
 import com.example.MusicPlayer.Model.Album;
+import com.example.MusicPlayer.Model.Artist;
 import com.example.MusicPlayer.Model.Song;
 import com.example.MusicPlayer.Services.MusicService;
 import org.junit.jupiter.api.Test;
@@ -21,11 +22,15 @@ public class TestMusicService {
     public void testSaveAlbum() {
         Album afterHouse = new Album("After Hours");
 
+        musicService.addArtist("The Blaze");
+        Artist artist = musicService.getArtistRepository().findArtistById(1).get();
+
+
         List<Song> songs = new ArrayList<>();
-        Song song_1 = new Song("Alone Again",4,afterHouse);
-        Song song_2 = new Song("Too Late",4,afterHouse);
-        Song song_3 = new Song("Hardest To Love",3,afterHouse);
-        Song song_4 = new Song("After Hours",6,afterHouse);
+        Song song_1 = new Song("Alone Again",artist, 4,afterHouse);
+        Song song_2 = new Song("Too Late",artist,4,afterHouse);
+        Song song_3 = new Song("Hardest To Love",artist,3,afterHouse);
+        Song song_4 = new Song("After Hours",artist,6,afterHouse);
 
         songs.add(song_1);
         songs.add(song_2);
@@ -34,6 +39,7 @@ public class TestMusicService {
 
 
         afterHouse.setSongs(songs);
+        afterHouse.setArtist(artist);
         musicService.saveAlbum(afterHouse);
         
        Album album = musicService.getAlbumRepository().findAlbumById(1).get();
@@ -56,9 +62,8 @@ public class TestMusicService {
 
     @Test
     public void testAssignArtistToAlbum() {
-        testSaveAlbum();
+        testAddSongToAlbum();
 
-        musicService.addArtist("The Blaze");
         Album album = musicService.getAlbumRepository().findAlbumById(1).get();
         List<Song> songs = musicService.getSongRepository().findSongByAlbumId(album.getId());
 
@@ -70,5 +75,14 @@ public class TestMusicService {
 
 
         musicService.assignArtistToAlbum(1,2);
+    }
+
+    @Test
+    public void testDeleteAlbum() {
+        testSaveAlbum();
+
+        Album album = musicService.getAlbumRepository().findAlbumById(1).get();
+
+        musicService.deleteAlbum(album.getId());
     }
 }

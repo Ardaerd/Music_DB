@@ -40,24 +40,44 @@ public class MusicService {
     @Transactional
     public void addSongToAlbum(int albumId, Song song) {
         Album album = albumRepository.findAlbumById(albumId).get();
-        song.setAlbum(album);
+        Artist artist = albumRepository.findAlbumById(albumId).get().getArtist();
 
-        albumRepository.save(album);
+        song.setAlbum(album);
+        song.setArtist(artist);
 
         List<Song> songs = album.getSongs();
         songs.add(song);
         album.setSongs(songs);
 
+        albumRepository.save(album);
     }
 
     @Transactional
     public void assignArtistToAlbum(int albumId, int artistId) {
         Album album = albumRepository.findAlbumById(albumId).get();
         Artist artist = artistRepository.findArtistById(artistId).get();
+        List<Song> songs = songRepository.findSongByAlbumId(albumId);
+
+        for (Song song : songs)
+            song.setArtist(artist);
+
 
         album.setArtist(artist);
 
+        songRepository.saveAll(songs);
         albumRepository.save(album);
+    }
+
+    @Transactional
+    public void deleteAlbum(int albumId) {
+        List<Song> songs = songRepository.findSongByAlbumId(albumId);
+
+        for (Song song : songs) {
+            song.setAlbum(null);
+        }
+
+        songRepository.saveAll(songs);
+        albumRepository.deleteById(albumId);
     }
 
     public List<Song> getSongs() {
