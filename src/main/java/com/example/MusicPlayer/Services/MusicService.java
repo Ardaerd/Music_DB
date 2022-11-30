@@ -87,6 +87,11 @@ public class MusicService {
     }
 
 
+    public List<Song> findSongWithArtistId(int id) {
+
+        return songRepository.findSongByArtistId(id);
+    }
+
     public List<Song> getSongs() {
 
         return songRepository.findAll();

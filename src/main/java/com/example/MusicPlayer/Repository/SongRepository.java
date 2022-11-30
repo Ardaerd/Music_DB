@@ -16,6 +16,9 @@ public interface SongRepository extends JpaRepository<Song,Integer> {
 
     List<Song> findSongByAlbumId(int id);
 
-//    @Query("SELECT S FROM Song S WHERE S.album_id = ?1")
+    List<Song> findSongByArtistId(int id);
+
+    // It is not working probably error is related to the colum name
+//    @Query("SELECT S FROM Song S WHERE S.AlbumId = ?1")
 //    List<Song> findSongByAlbumId(int id);
 }

@@ -98,4 +98,15 @@ public class TestMusicService {
 
     }
 
+    @Test
+    public void testFindSongWithArtistId() {
+        testSaveAlbum();
+
+        List<Song> songs = musicService.findSongWithArtistId(1);
+
+        for (Song song : songs) {
+            System.out.println("Song Name: " + song.getName() + ", " + "Artist ID: " + song.getArtist().getId());
+        }
+    }
+
 }
