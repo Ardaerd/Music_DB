@@ -80,6 +80,13 @@ public class MusicService {
         albumRepository.deleteById(albumId);
     }
 
+
+    public void deleteSong(int songId) {
+        Song song = songRepository.findSongById(songId).get();
+        songRepository.deleteById(songId);
+    }
+
+
     public List<Song> getSongs() {
 
         return songRepository.findAll();

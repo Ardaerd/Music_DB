@@ -85,4 +85,17 @@ public class TestMusicService {
 
         musicService.deleteAlbum(album.getId());
     }
+
+
+    @Test
+    public void testDeleteSong() {
+        testSaveAlbum();
+
+        Song song = musicService.getSongRepository().findSongById(4).get();
+        System.out.println(song.getName());
+
+        musicService.deleteSong(song.getId());
+
+    }
+
 }
