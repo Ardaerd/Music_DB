@@ -2,6 +2,7 @@ package com.example.MusicPlayer.Model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,19 +18,19 @@ public class Playlist {
 
     @ManyToMany
     @JoinTable(name = "Playlist_Playlists",
-            joinColumns = @JoinColumn(name = "Playlist_1_ID",
+            joinColumns = @JoinColumn(name = "Parent_Playlist",
                     referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "Playlist_2_ID",
+            inverseJoinColumns = @JoinColumn(name = "Child_Playlist",
                     referencedColumnName = "id"))
-    private List<Playlist> playlists;
+    private List<Playlist> playlists = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinTable(name = "Playlist_Songs",
             joinColumns = @JoinColumn(name = "Playlist_ID",
                     referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "Song_ID",
                     referencedColumnName = "id"))
-    private List<Song> songs;
+    private List<Song> songs = new ArrayList<>();
 
     public Playlist(String name) {
         this.name = name;

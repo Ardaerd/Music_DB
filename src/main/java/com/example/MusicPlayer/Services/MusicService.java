@@ -101,6 +101,26 @@ public class MusicService {
 
     }
 
+    @Transactional
+    public void addPlaylistToPlaylist(int parentPlaylistId, int childPlaylistId) {
+        Playlist childPlaylist = playlistRepository.findPlaylistById(childPlaylistId).get();
+        System.out.println(childPlaylist.getId());
+        Playlist parentPlaylist = playlistRepository.findPlaylistById(parentPlaylistId).get();
+        System.out.println(parentPlaylist.getId());
+        List<Song> childSongs = childPlaylist.getSongs();
+        List<Song> parentSongs = parentPlaylist.getSongs();
+
+        List<Playlist> listOfPlaylist = parentPlaylist.getPlaylists();
+        parentPlaylist.getPlaylists().add(childPlaylist);
+
+        //parentSongs.addAll(childSongs);
+
+        //parentPlaylist.setSongs(parentSongs);
+        //parentPlaylist.setPlaylists(listOfPlaylist);
+        playlistRepository.save(parentPlaylist);
+
+    }
+
     public List<Song> findSongWithArtistId(int id) {
 
         return songRepository.findSongByArtistId(id);

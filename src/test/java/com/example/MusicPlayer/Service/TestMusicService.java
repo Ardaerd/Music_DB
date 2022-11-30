@@ -126,4 +126,19 @@ public class TestMusicService {
         System.out.println("Added Song: " + song.getName());
     }
 
+    @Test
+    public void testAddPlaylistToPlaylist() {
+        testAddSongToPlaylist();
+
+        Playlist parentPlaylist = new Playlist("For Special Vibes");
+        Playlist childPlaylist = musicService.getPlaylistRepository().findPlaylistById(1).get();
+
+        musicService.getPlaylistRepository().save(parentPlaylist);
+
+        musicService.addPlaylistToPlaylist(2,childPlaylist.getId());
+
+
+
+    }
+
 }
