@@ -2,6 +2,7 @@ package com.example.MusicPlayer.Service;
 
 import com.example.MusicPlayer.Model.Album;
 import com.example.MusicPlayer.Model.Artist;
+import com.example.MusicPlayer.Model.Playlist;
 import com.example.MusicPlayer.Model.Song;
 import com.example.MusicPlayer.Services.MusicService;
 import org.junit.jupiter.api.Test;
@@ -107,6 +108,22 @@ public class TestMusicService {
         for (Song song : songs) {
             System.out.println("Song Name: " + song.getName() + ", " + "Artist ID: " + song.getArtist().getId());
         }
+    }
+
+    @Test
+    public void testAddSongToPlaylist() {
+        testSaveAlbum();
+
+        Playlist playlist = new Playlist("To The Weekend");
+        Song song = musicService.getSongRepository().findSongById(6).get();
+
+        musicService.getPlaylistRepository().save(playlist);
+
+        musicService.addSongToPlaylist(1,6);
+        musicService.addSongToPlaylist(1,4);
+
+
+        System.out.println("Added Song: " + song.getName());
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.MusicPlayer.Services;
 
 import com.example.MusicPlayer.Model.Album;
 import com.example.MusicPlayer.Model.Artist;
+import com.example.MusicPlayer.Model.Playlist;
 import com.example.MusicPlayer.Model.Song;
 import com.example.MusicPlayer.Repository.AlbumRepository;
 import com.example.MusicPlayer.Repository.ArtistRepository;
@@ -86,6 +87,19 @@ public class MusicService {
         songRepository.deleteById(songId);
     }
 
+    @Transactional
+    public void addSongToPlaylist(int playlistId, int songId) {
+        Song song = songRepository.findSongById(songId).get();
+        Playlist playlist = playlistRepository.findPlaylistById(playlistId).get();
+
+        List<Song> songs = playlist.getSongs();
+        songs.add(song);
+
+        playlist.setSongs(songs);
+
+        playlistRepository.save(playlist);
+
+    }
 
     public List<Song> findSongWithArtistId(int id) {
 

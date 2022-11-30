@@ -10,10 +10,10 @@ public class Playlist {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private int id;
 
     @Column(name = "Name", nullable = false)
-    private Long name;
+    private String name;
 
     @ManyToMany
     @JoinTable(name = "Playlist_Playlists",
@@ -23,7 +23,7 @@ public class Playlist {
                     referencedColumnName = "id"))
     private List<Playlist> playlists;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(name = "Playlist_Songs",
             joinColumns = @JoinColumn(name = "Playlist_ID",
                     referencedColumnName = "id"),
@@ -31,11 +31,42 @@ public class Playlist {
                     referencedColumnName = "id"))
     private List<Song> songs;
 
-    public Long getId() {
+    public Playlist(String name) {
+        this.name = name;
+    }
+
+    public Playlist() {
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Playlist> getPlaylists() {
+        return playlists;
+    }
+
+    public void setPlaylists(List<Playlist> playlists) {
+        this.playlists = playlists;
+    }
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
     }
 }
