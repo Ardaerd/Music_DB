@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="UTF-8">
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="scripts/musicDB.js"></script>
+
+  <title>Your Playlists</title>
+
+</head>
+
+<body onload="getAllPlaylists()">
+    <div>
+         <h2> Your Playlists   <h2>     
+    </div>
+
+   
+
+    <div id="applicationLayer">
+
+      <table id="playlists_table">
+
+      </table>    
+
+      <div>
+
+      </div>
+
+    </div>
+
+<style>
+
+
+    #applicationLayer{
+        border: 100px solid white;
+    }
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+
+   
+      }
+
+
+      td {
+        text-align: center;
+        height: 40px;
+        width: 130px;
+        vertical-align: center;
+        }   
+    </style>
+
+  
+
+</body>
+</html>

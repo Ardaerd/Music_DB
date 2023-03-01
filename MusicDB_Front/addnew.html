@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="scripts/musicDB.js"></script>
+
+<title>Add New</title>
+
+</head>
+
+<body onload="getAllSongs()">
+    <div>
+        <h2> Add New   <h2>    
+    </div>
+    
+
+    <div id="applicationLayer">
+
+        <div class="topnav">
+            <input type="search" placeholder="Search.." id="searchBar">
+            <input type="submit" onclick="searchSongs()" value="search" id= "searchBtn">
+        </div>
+        
+        <br/> 
+        
+        <div id="songs_table">
+          
+          
+        </div>
+
+        <br/>
+        
+        <div class="">
+            <input type="text" placeholder="Playlist Name" id="playlistNameBar">
+            <input type="submit" onclick="createPlaylist()" value="Create" id="createButton">
+        </div>
+
+        <br/>
+
+        <div>
+          <input type="button" onclick="openWin()" value="show playlists" id="showPlaylistButton">
+        
+        </div>
+
+    </div>
+
+
+
+<style>
+    #applicationLayer{
+        border: 100px solid white;
+    }
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+
+   
+      }
+
+
+      td {
+        text-align: center;
+        height: 40px;
+        width: 130px;
+        vertical-align: center;
+}
+
+
+
+
+#createButton{
+        background-color:blue;
+        color: white;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        width: 100px;
+        height: 30px;
+}
+    
+
+#searchBtn {
+
+    color: black;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    width: 100px;
+    height: 30px;
+    }
+
+
+    #searchBar{
+    width: 200px;
+    height: 30px;
+
+    }
+
+    #playlistNameBar{
+    width: 200px;
+    height: 30px;
+
+    }
+
+
+    #showPlaylistButton{
+        width: 200px;
+        color: blue;
+    
+    }
+
+    </style>
+
+  
+
+</body>
+</html>
